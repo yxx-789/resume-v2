@@ -70,9 +70,40 @@
     });
   }
 
+  /* ---------- 卡片 3D 倾斜微交互 ---------- */
+  function setupTilt() {
+    var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!fine) return;
+    var LIFT = { '.project-card': -3, '.hobby-card': -2, '.tl-card': -2 };
+    document.querySelectorAll('.project-card, .hobby-card, .tl-card').forEach(function (card) {
+      var cls = '.' + card.className.split(' ')[0];
+      var lift = LIFT[cls] || 0;
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width;
+        var py = (e.clientY - r.top) / r.height;
+        gsap.to(card, {
+          rotationY: (px - 0.5) * 8, rotationX: (0.5 - py) * 8, y: lift,
+          transformPerspective: 600, duration: 0.35, ease: 'power2.out'
+        });
+        var hot = card.querySelector('.pc-emoji, .hobby-img');
+        if (hot) gsap.to(hot, { y: -5, duration: 0.3 });
+      });
+      card.addEventListener('pointerleave', function () {
+        gsap.to(card, {
+          rotationX: 0, rotationY: 0, y: 0,
+          transformPerspective: 600, duration: 0.6, ease: 'elastic.out(1, 0.55)'
+        });
+        var hot = card.querySelector('.pc-emoji, .hobby-img');
+        if (hot) gsap.to(hot, { y: 0, duration: 0.3 });
+      });
+    });
+  }
+
   function init() {
     splitChars(document.querySelector('.hero .name'));
     splitChars(document.querySelector('#typeTarget'));
+    setupTilt();
   }
 
   window.anim = { init: init, playView: playView };
