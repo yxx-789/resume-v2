@@ -227,16 +227,26 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.78rem;
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
   font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
+  letter-spacing: 0.14em;
   margin-bottom: 1.1rem;
   padding-bottom: 0.6rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+  color: var(--ink-faint);
 }
-.section-title .icon { font-size: 0.95rem; }
+.section-title .icon { font-size: 0.95rem; color: var(--accent); }
+/* 标题文字：默认灰蓝，支持渐变时海报字 */
+.section-title .t { color: var(--ink-strong); }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .section-title .t {
+    background: linear-gradient(90deg, #1e3a5f, #64748b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
 
 /* =========================================================
    视图① 关于我
@@ -266,7 +276,7 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   .hero-photos img { width: clamp(80px, 24vw, 120px); height: clamp(80px, 24vw, 120px); }
 }
 .hero .name {
-  font-size: 2rem;
+  font-size: clamp(2.6rem, 5.5vw, 4rem);
   font-weight: 600;
   color: var(--ink-strong);
   letter-spacing: 0.06em;
@@ -287,6 +297,17 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
 }
 /* Hero 逐字展开：单字为内联块以支持 transform 动画 */
 .hero .char { display: inline-block; will-change: transform; }
+/* Hero 逐字：默认深色，支持渐变时纵向渐变文字 */
+.hero .char, #typeTarget .char { color: var(--ink-strong); }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .hero .char, #typeTarget .char {
+    background: linear-gradient(180deg, #1e3a5f, rgba(30, 58, 95, 0.35));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
 /* 数字滚动计数：等宽数字避免逐位跳动 */
 .num { font-variant-numeric: tabular-nums; }
 .hero .actions {
@@ -345,7 +366,7 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
 
 /* Hero 打字机 */
 .typing-line {
-  font-size: 1.05rem;
+  font-size: clamp(1.2rem, 2.8vw, 1.7rem);
   color: var(--ink-soft);
   min-height: 1.7em;
   margin-bottom: 0.8rem;
