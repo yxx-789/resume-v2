@@ -1145,7 +1145,7 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
 /* 打印友好：去掉毛玻璃（打印无法渲染 backdrop-filter） */
 @media print {
   body { background: #fff; }
-  .navbar, .bg-dots, .bg-glows, .modal-overlay, .nav-contact { display: none !important; }
+  .navbar, .bg-dots, .bg-glows, .bg-flow, .bg-video, .modal-overlay, .nav-contact { display: none !important; }
   .view { display: block !important; animation: none; padding: 0; }
   .view.active .reveal { animation: none; }
   .glass, .featured, .tl-card, .mini-card, .hobby-card, .project-card, .modal-card {
