@@ -3,6 +3,9 @@
   var HAS_GSAP = typeof gsap !== 'undefined';
   var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* 各视图光斑色相（浅色基调内微变）：sky / lighter blue / indigo / blue / cyan */
+  var VIEW_HUE = { about: 199, education: 210, experience: 243, works: 217, skills: 186 };
+
   if (!HAS_GSAP || REDUCED) {
     // 不注入 js-anim：内容保持静态可见，CSS 负责降级
     window.anim = { init: function () {}, playView: function () {} };
@@ -10,11 +13,13 @@
   }
   document.documentElement.classList.add('js-anim');
 
-  /* ---------- 视图入场编排 ---------- */
+  /* ---------- 视图入场编排（电影化 blur→focus + 光斑变色） ---------- */
   function playView(name) {
     var view = document.getElementById(name);
     if (!view) return;
-    gsap.fromTo(view, { opacity: 0, y: -6 }, { opacity: 1, y: 0, duration: 0.25, ease: 'power1.out' });
+    gsap.fromTo(view,
+      { opacity: 0, y: -6, filter: 'blur(4px)' },
+      { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.45, ease: 'power1.out' });
     var reveals = view.querySelectorAll('.reveal');
     if (reveals.length) {
       gsap.set(reveals, { opacity: 0, y: 14 });
@@ -22,6 +27,10 @@
     }
     if (name === 'about') playHero(view);
     if (name === 'experience' || name === 'works') countUp(view);
+    var hue = VIEW_HUE[name];
+    if (hue !== undefined) {
+      gsap.to(document.documentElement, { '--glow-hue': hue, duration: 0.8, ease: 'sine.inOut' });
+    }
   }
 
   /* ---------- 字符拆分（幂等） ---------- */
