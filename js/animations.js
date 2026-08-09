@@ -105,22 +105,47 @@
     });
   }
 
-  /* ---------- 背景视差光斑 ---------- */
+  /* ---------- 背景：流动层 + 光斑视差 + 视频纹理 ---------- */
   function setupBackground() {
+    // 流动层：极慢呼吸漂移（transform-only）
+    var flow = document.querySelector('.bg-flow');
+    if (flow) {
+      gsap.to(flow, { x: 22, y: -14, duration: 9, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    }
+    // 光斑各自漂移
     var glows = document.querySelector('.bg-glows');
-    if (!glows) return;
-    gsap.utils.toArray('.bg-glows .glow').forEach(function (g, i) {
-      gsap.to(g, {
-        x: gsap.utils.random(-34, 34), y: gsap.utils.random(-26, 26),
-        duration: gsap.utils.random(6, 10), ease: 'sine.inOut', yoyo: true, repeat: -1, delay: i * 0.5
+    if (glows) {
+      gsap.utils.toArray('.bg-glows .glow').forEach(function (g, i) {
+        gsap.to(g, {
+          x: gsap.utils.random(-34, 34), y: gsap.utils.random(-26, 26),
+          duration: gsap.utils.random(6, 10), ease: 'sine.inOut', yoyo: true, repeat: -1, delay: i * 0.5
+        });
       });
-    });
+    }
+    // 视频纹理：loadeddata 后从 0 淡入到目标透明度（桌面 0.12 / 移动 ≤640px 0.06）
+    var video = document.querySelector('.bg-video');
+    if (video) {
+      video.src = 'assets/vendor/bg-texture.mp4';
+      video.preload = 'auto';
+      var targetOp = window.matchMedia && window.matchMedia('(max-width: 640px)').matches ? 0.06 : 0.12;
+      var onReady = function () {
+        gsap.to(video, { opacity: targetOp, duration: 0.8, ease: 'sine.inOut' });
+        if (video.play) video.play().catch(function () {});
+      };
+      if (video.readyState >= 2) {
+        onReady();
+      } else {
+        video.addEventListener('loadeddata', onReady, { once: true });
+        video.addEventListener('error', function () { video.style.display = 'none'; }, { once: true });
+      }
+    }
+    // 整层鼠标视差（±40px，原 ±20px）
     var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (!fine) return;
+    if (!glows || !fine) return;
     var cur = { x: 0, y: 0 }, target = { x: 0, y: 0 };
     document.addEventListener('pointermove', function (e) {
-      target.x = (e.clientX / window.innerWidth - 0.5) * 40;
-      target.y = (e.clientY / window.innerHeight - 0.5) * 40;
+      target.x = (e.clientX / window.innerWidth - 0.5) * 80;
+      target.y = (e.clientY / window.innerHeight - 0.5) * 80;
     });
     gsap.ticker.add(function () {
       cur.x += (target.x - cur.x) * 0.06;

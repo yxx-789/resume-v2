@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>邢耀 · AI 产品经理</title>
   <meta name="description" content="邢耀 — AI 产品经理，百度 AI 产品实习，独立全栈开发 AI 创作工作台。">
-  <link rel="stylesheet" href="style.css?v=20260809-4">
+  <link rel="stylesheet" href="style.css?v=20260809-5">
 </head>
 <body>
 
@@ -15,11 +15,17 @@
   <span class="dot d4"></span><span class="dot d5"></span><span class="dot d6"></span>
 </div>
 
+<!-- ═══════════════ 背景流动层（GSAP 呼吸漂移） ═══════════════ -->
+<div class="bg-flow" aria-hidden="true"></div>
+
 <!-- ═══════════════ 背景光斑（GSAP 漂移 + 鼠标视差） ═══════════════ -->
 <div class="bg-glows" aria-hidden="true">
   <span class="glow g1"></span><span class="glow g2"></span>
   <span class="glow g3"></span><span class="glow g4"></span>
 </div>
+
+<!-- ═══════════════ 背景视频纹理（JS 注入 src 后淡入；无 JS/降级不播放） ═══════════════ -->
+<video class="bg-video" preload="none" muted loop playsinline aria-hidden="true" tabindex="-1"></video>
 
 <!-- ═══════════════ 顶部导航 ═══════════════ -->
 <nav class="navbar">

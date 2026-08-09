@@ -17,6 +17,7 @@
   --shadow: 0 4px 20px rgba(15, 23, 42, 0.05), 0 4px 28px rgba(56, 189, 248, 0.10);
   --glow: rgba(56, 189, 248, 0.15);   /* 天蓝冷光 */
   --border-glow: #bae6fd;             /* 悬停浅蓝描边 */
+  --glow-hue: 199;                    /* 光斑色相（Task 4 过渡复用） */
   --nav-h: 58px;
 }
 
@@ -26,38 +27,67 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Inter', 'Noto Serif SC', 'PingFang SC', 'Hiragino Sans GB', serif;
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  background:
+    radial-gradient(ellipse 55% 45% at 18% 8%, rgba(224, 242, 254, 0.95), transparent 70%),
+    radial-gradient(ellipse 60% 50% at 85% 88%, rgba(191, 219, 254, 0.7), transparent 70%),
+    linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
   min-height: 100vh;
   color: var(--ink);
   line-height: 1.65;
   position: relative;
 }
 
+/* 背景流动层（极慢呼吸漂移；无 JS 时静态） */
+.bg-flow {
+  position: fixed;
+  inset: -10%;
+  z-index: -4;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 40% 35% at 28% 30%, rgba(125, 211, 252, 0.22), transparent 70%),
+    radial-gradient(ellipse 38% 32% at 72% 68%, rgba(56, 189, 248, 0.16), transparent 70%);
+  will-change: transform;
+}
+
+/* 背景视频纹理（默认不可见，JS 加载后淡入） */
+.bg-video {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  filter: blur(2px);
+  pointer-events: none;
+}
+
 /* 背景光斑（GSAP 漂移 + 视差；无 JS/降级时为静态装饰） */
 .bg-glows {
   position: fixed;
   inset: 0;
-  z-index: -2;
+  z-index: -3;
   overflow: hidden;
   pointer-events: none;
 }
 .glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(60px);
+  filter: blur(80px);
   will-change: transform;
   opacity: 0.65;
+  background: radial-gradient(circle, hsla(var(--glow-hue, 199), 95%, 80%, 0.6), transparent 70%);
 }
-.g1 { width: 520px; height: 360px; top: 6%;  left: 6%;  background: radial-gradient(circle, rgba(125, 211, 252, 0.55), transparent 70%); }
-.g2 { width: 440px; height: 320px; top: 16%; right: 6%; background: radial-gradient(circle, rgba(56, 189, 248, 0.50), transparent 70%); }
-.g3 { width: 600px; height: 420px; bottom: 10%; left: 18%; background: radial-gradient(circle, rgba(147, 197, 253, 0.50), transparent 70%); }
-.g4 { width: 420px; height: 300px; bottom: 6%; right: 16%; background: radial-gradient(circle, rgba(56, 189, 248, 0.40), transparent 70%); }
+.g1 { width: 700px; height: 500px; top: 6%;  left: 6%; }
+.g2 { width: 600px; height: 440px; top: 16%; right: 6%; }
+.g3 { width: 800px; height: 560px; bottom: 10%; left: 18%; }
+.g4 { width: 580px; height: 420px; bottom: 6%; right: 16%; }
 
 /* 漂浮光点背景（纯 CSS 微动效） */
 .bg-dots {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
   overflow: hidden;
   pointer-events: none;
 }
@@ -1038,6 +1068,7 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   .hero { padding: 2rem 1rem 1.6rem; }
   .project-grid { grid-template-columns: 1fr; }
   .glow { filter: blur(40px); opacity: 0.5; }
+  .bg-video { opacity: 0; }
 }
 
 /* 打印友好：去掉毛玻璃（打印无法渲染 backdrop-filter） */
@@ -1061,4 +1092,5 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   .dot { animation: none; }
   .view.active .reveal { animation: none; }
   .skill-bar-fill { transition: none; }
+  .bg-video { display: none; }
 }
