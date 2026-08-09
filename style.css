@@ -960,7 +960,7 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
 }
 .hobby-card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(56, 189, 248, 0.14), 0 10px 28px rgba(56, 189, 248, 0.16); border-color: var(--border-glow); }
 
-/* 组件二期：三卡渐变描边环 + 加强玻璃 + 全透 mask（不裁剪卡片填充） */
+/* 组件二期：三卡渐变描边环 + 加强玻璃（渐变环 mask 只作用于 ::before） */
 .project-card,
 .hobby-card,
 .tl-card {
@@ -968,8 +968,6 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   border: 1px solid transparent;
   -webkit-backdrop-filter: blur(24px);
   backdrop-filter: blur(24px);
-  /* 全透 mask：卡片自身不裁剪玻璃填充，仅使渐变描边环的 mask 手法在样式上可观测 */
-  mask: linear-gradient(#fff 0 0);
 }
 .project-card::before,
 .hobby-card::before,

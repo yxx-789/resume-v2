@@ -16,10 +16,10 @@ __result(!!card, 'project card exists');
 if (card) {
   var cs = getComputedStyle(card);
   __result(cs.borderTopColor === 'rgba(0, 0, 0, 0)', 'card border transparent (ring carries gradient), got ' + cs.borderTopColor);
-  __result(cs.maskImage.indexOf('linear-gradient') >= 0, 'card gradient border ring (mask), got ' + cs.maskImage);
+  __result(getComputedStyle(card, '::before').maskImage.indexOf('linear-gradient') >= 0, 'card gradient border ring (mask), got ' + getComputedStyle(card, '::before').maskImage);
   __result(cs.backdropFilter.indexOf('blur') >= 0, 'card stronger blur, got ' + cs.backdropFilter);
 }
 var hb = document.querySelector('.hobby-card');
-__result(!!hb && getComputedStyle(hb).maskImage.indexOf('linear-gradient') >= 0, 'hobby card gradient ring, got ' + (hb ? getComputedStyle(hb).maskImage : 'none'));
+__result(!!hb && getComputedStyle(hb, '::before').maskImage.indexOf('linear-gradient') >= 0, 'hobby card gradient ring, got ' + (hb ? getComputedStyle(hb, '::before').maskImage : 'none'));
 var tl = document.querySelector('.tl-card');
-__result(!!tl && getComputedStyle(tl).maskImage.indexOf('linear-gradient') >= 0, 'tl card gradient ring, got ' + (tl ? getComputedStyle(tl).maskImage : 'none'));
+__result(!!tl && getComputedStyle(tl, '::before').maskImage.indexOf('linear-gradient') >= 0, 'tl card gradient ring, got ' + (tl ? getComputedStyle(tl, '::before').maskImage : 'none'));
