@@ -203,6 +203,10 @@ body {
   transition: background 0.2s, transform 0.2s;
 }
 .nav-contact a:hover { background: rgba(255, 255, 255, 0.7); transform: translateY(-1px); }
+/* GitHub 图标（真实 logo，替代 🐙 emoji；尺寸与同组其他图标同步） */
+.nav-contact a img.gh-ico { width: 20px; height: 20px; }
+.hero .contacts img.gh-ico { width: 1.1em; height: 1.1em; vertical-align: -0.2em; }
+.c-emoji img.gh-ico { width: 1.2rem; height: 1.2rem; vertical-align: -0.2em; }
 @media (max-width: 640px) { .nav-contact { display: none; } }
 
 /* =========================================================
