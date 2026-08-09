@@ -1,4 +1,4 @@
-// 背景系统二期：流动层 / 光斑升级(hsl+放大) / 视频纹理淡入 / 层序
+// 背景系统二期：流动层 / 光斑升级(hsl+放大) / 视频纹理隐藏 / 层序
 async function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
 function waitFor(fn, timeout) {
   return new Promise(function (resolve) {

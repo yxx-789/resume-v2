@@ -38,7 +38,7 @@ if (char) {
 var greetChar = document.querySelector('.hero-view #typeTarget .char');
 __result(!!greetChar, 'greeting chars present');
 if (greetChar) {
-  __result(getComputedStyle(greetChar).backgroundImage.indexOf('16, 32, 39') >= 0, 'greeting chars also dark ink gradient');
+  __result(getComputedStyle(greetChar).backgroundImage.indexOf('16, 32, 39') >= 0, 'greeting chars also warm ink gradient');
 }
 var roleEl = hero.querySelector('.hero .role');
 if (roleEl) {

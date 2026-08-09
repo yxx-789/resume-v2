@@ -61,7 +61,7 @@ body {
   will-change: transform;
 }
 
-/* 背景视频纹理（默认不可见，JS 加载后淡入） */
+/* 背景视频纹理（v9 奶油主题：不再显示，元素保留机制零改动） */
 .bg-video {
   display: none; /* v9 奶油主题：全局深色纹理不再显示（元素保留，机制零改动） */
   position: fixed;
@@ -247,7 +247,7 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   color: var(--ink-faint);
 }
 .section-title .icon { font-size: 0.95rem; color: var(--accent); }
-/* 标题文字：默认灰蓝，支持渐变时海报字 */
+/* 标题文字：暖墨渐变，支持渐变时海报字 */
 .section-title .t { color: var(--ink-strong); }
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   .section-title .t {
