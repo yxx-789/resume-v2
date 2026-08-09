@@ -13,14 +13,19 @@ if (links) {
   __result(getComputedStyle(links).borderRadius.indexOf('999') >= 0, 'nav-links pill radius kept, got ' + getComputedStyle(links).borderRadius);
   __result(getComputedStyle(links).backdropFilter.indexOf('blur') >= 0, 'nav-links blur kept, got ' + getComputedStyle(links).backdropFilter);
 }
-var firstLink = links ? links.querySelector('a') : null;
-if (firstLink) {
-  __result(getComputedStyle(firstLink).color.indexOf('255, 255, 255') >= 0, 'nav link white over hero, got ' + getComputedStyle(firstLink).color);
+var linksArr = links ? links.querySelectorAll('a') : [];
+var inactiveLink = linksArr.length > 1 ? linksArr[1] : null;
+if (inactiveLink) {
+  __result(getComputedStyle(inactiveLink).color.indexOf('255, 255, 255') >= 0, 'nav inactive link white over hero, got ' + getComputedStyle(inactiveLink).color);
+}
+var activeLink = links ? links.querySelector('a.active') : null;
+if (activeLink) {
+  __result(getComputedStyle(activeLink).color.indexOf('125, 211, 252') >= 0, 'nav active link sky-blue over hero, got ' + getComputedStyle(activeLink).color);
 }
 
 // 滚动到底 → is-scrolled → 浅色玻璃
 window.scrollTo(0, 10000);
-await sleep(350);
+await sleep(550);
 __result(nav.classList.contains('is-scrolled'), 'nav is-scrolled after scroll');
 if (links) {
   var bg2 = getComputedStyle(links).backgroundColor;
@@ -32,7 +37,7 @@ window.scrollTo(0, 0);
 await sleep(100);
 var next = document.querySelector('.hero-next');
 next.click();
-await sleep(450);
+await sleep(550);
 __result(document.querySelector('.view.active').id === 'education', 'hero-next routes to education');
 __result(nav.classList.contains('is-scrolled'), 'nav is-scrolled on education');
 if (links) {
@@ -41,7 +46,7 @@ if (links) {
 
 // 回到 about → 顶部深色玻璃
 document.querySelector('.nav-links a[data-view="about"]').click();
-await sleep(450);
+await sleep(550);
 __result(document.querySelector('.view.active').id === 'about', 'back to about');
 __result(nav.classList.contains('is-scrolled') === false, 'nav not is-scrolled back on about');
 if (links) {
