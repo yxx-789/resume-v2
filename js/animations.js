@@ -148,6 +148,22 @@
         video.addEventListener('error', function () { video.style.display = 'none'; }, { once: true });
       }
     }
+    // 首屏 Hero 云端小岛视频：海报兜底不黑屏，loadeddata 后淡入播放
+    var heroVideo = document.querySelector('.hero-view .hero-video');
+    if (heroVideo) {
+      heroVideo.src = 'assets/vendor/hero-island.mp4';
+      heroVideo.preload = 'auto';
+      var heroReady = function () {
+        gsap.to(heroVideo, { opacity: 1, duration: 0.8, ease: 'sine.inOut' });
+        if (heroVideo.play) heroVideo.play().catch(function () {});
+      };
+      if (heroVideo.readyState >= 2) {
+        heroReady();
+      } else {
+        heroVideo.addEventListener('loadeddata', heroReady, { once: true });
+        heroVideo.addEventListener('error', function () { heroVideo.style.display = 'none'; }, { once: true });
+      }
+    }
     // 整层鼠标视差（±40px，原 ±20px）
     var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     if (!glows || !fine) return;

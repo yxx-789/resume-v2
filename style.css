@@ -355,6 +355,106 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
 }
 .hero .contacts a:hover { color: var(--accent); }
 
+/* =========================================================
+   三期① 首屏 Hero 全屏画布（深色电影感）
+   ========================================================= */
+.hero-view {
+  position: relative;
+  isolation: isolate;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  min-height: calc(100svh - var(--nav-h));
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.hero-video { opacity: 0; } /* 加载后由 JS 淡入 */
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(7, 12, 14, 0.30) 0%, rgba(7, 12, 14, 0.55) 60%, rgba(7, 12, 14, 0.72) 100%);
+}
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 880px;
+  margin: 0 auto;
+  min-height: calc(100svh - var(--nav-h));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3.2rem 1rem 4.2rem;
+}
+/* 深色画布上的文字适配（置于既有 .hero 规则之后覆盖；#typeTarget 带 id 需更高优先级） */
+.hero-view .name { color: #fff; }
+.hero-view .char, .hero-view #typeTarget .char { color: #fff; }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .hero-view .char, .hero-view #typeTarget .char {
+    background: linear-gradient(180deg, #ffffff, rgba(255, 255, 255, 0.55));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+.hero-view .role {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.30);
+}
+.hero-view .typing-line,
+.hero-view .typing-target { color: rgba(255, 255, 255, 0.92); }
+.hero-view .btn-ghost {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.30);
+}
+.hero-view .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+.hero-view .contacts { color: rgba(255, 255, 255, 0.78); }
+.hero-view .contacts a {
+  color: rgba(255, 255, 255, 0.78);
+  border-bottom-color: rgba(255, 255, 255, 0.35);
+}
+/* 底部「下一页」引导 */
+.hero-next {
+  position: absolute;
+  left: 50%;
+  bottom: 1.2rem;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+  padding: 0.4rem 1.1rem;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  animation: heroNudge 2.4s ease-in-out infinite;
+}
+.hero-next .hn-label { font-size: 0.7rem; letter-spacing: 0.24em; }
+.hero-next .hn-title { font-size: 0.95rem; font-weight: 600; letter-spacing: 0.06em; }
+.hero-next:hover { color: #fff; }
+@keyframes heroNudge {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(6px); }
+}
+
 .btn {
   display: inline-block;
   font-size: 0.85rem;
@@ -1140,6 +1240,10 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   .project-grid { grid-template-columns: 1fr; }
   .glow { filter: blur(40px); opacity: 0.5; }
   .bg-video { opacity: 0; }
+  .hero-inner { padding: 2.6rem 1rem 3.6rem; }
+  .hero-next { bottom: 0.7rem; }
+  .hero-next .hn-label { font-size: 0.64rem; }
+  .hero-next .hn-title { font-size: 0.85rem; }
 }
 
 /* 打印友好：去掉毛玻璃（打印无法渲染 backdrop-filter） */
@@ -1157,6 +1261,15 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   .project-card::before, .hobby-card::before, .tl-card::before { display: none; }
   /* 进度条按真实比例静态渲染 */
   .skill-bar-fill { width: var(--w) !important; transition: none; }
+  .hero-view, .hero-inner { min-height: auto; }
+  .hero-view .hero-bg, .hero-view .hero-scrim, .hero-view .hero-next { display: none !important; }
+  .hero-view .name, .hero-view .char, .hero-view #typeTarget .char, .hero-view .role, .hero-view .typing-line {
+    color: var(--ink-strong) !important;
+    background: none !important;
+    -webkit-text-fill-color: var(--ink-strong) !important;
+  }
+  .hero-view .btn-ghost { background: #fff !important; color: var(--ink-strong) !important; border-color: #ddd !important; }
+  .hero-view .contacts, .hero-view .contacts a { color: var(--ink-soft) !important; border-bottom-color: #ccc !important; }
 }
 
 /* 尊重系统「减弱动效」设置 */
@@ -1166,4 +1279,6 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   .view.active .reveal { animation: none; }
   .skill-bar-fill { transition: none; }
   .bg-video { display: none; }
+  .hero-view .hero-video { display: none; } /* 海报兜底，不播视频 */
+  .hero-next { animation: none; }
 }
