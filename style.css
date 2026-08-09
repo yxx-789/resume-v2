@@ -170,6 +170,10 @@ body::before {
 }
 .view.active .reveal { animation: riseUp 0.55s ease both; }
 
+/* GSAP 接管入场：关闭 CSS 侧入场动画，避免双动画（仅在 JS+GSAP 可用时生效） */
+html.js-anim .view { animation: none; }
+html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: translateY(14px); }
+
 /* ---- 玻璃面板 ---- */
 .glass {
   background: var(--glass-bg);
@@ -1050,6 +1054,7 @@ body::before {
 
 /* 尊重系统「减弱动效」设置 */
 @media (prefers-reduced-motion: reduce) {
+  .view { animation: none; }
   .dot, .caret { animation: none; }
   .view.active .reveal { animation: none; }
   .skill-bar-fill { transition: none; }
