@@ -62,8 +62,13 @@
     view.querySelectorAll('.num[data-count]').forEach(function (el) {
       var target = parseFloat(el.dataset.count);
       var suffix = el.dataset.suffix || '';
+      // 评审 Fix 2：视图反复激活时先清理作用在元素上的残留 tween
+      gsap.killTweensOf(el);
+      // 根因兜底：计数 tween 的目标是代理对象（obj）而非 el，killTweensOf(el) 杀不到它，
+      // 需按引用杀掉上一轮代理 tween，否则新旧 tween 同时写 el.textContent 造成数字抖动
+      if (el._countTween) el._countTween.kill();
       var obj = { v: 0 };
-      gsap.to(obj, {
+      el._countTween = gsap.to(obj, {
         v: target, duration: 1.2, ease: 'power2.out',
         onUpdate: function () { el.textContent = Math.round(obj.v) + suffix; }
       });
