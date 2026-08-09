@@ -14,7 +14,7 @@ __result(mh >= window.innerHeight - 100, 'hero fills viewport (minus nav), minHe
 // 无 .glass 容器
 __result(!hero.querySelector('.glass'), 'hero has no .glass box');
 
-// 三层背景：海报兜底图 → 视频 → 浅色渐变遮罩
+// 三层背景：海报兜底图 → 视频 → 奶油渐变遮罩 + 三色场
 var poster = hero.querySelector('.hero-poster');
 __result(!!poster && getComputedStyle(poster).position === 'absolute', 'poster bg layer present');
 var video = hero.querySelector('.hero-video');
@@ -33,16 +33,17 @@ __result(!!char, 'hero name split into chars');
 if (char) {
   var cs = getComputedStyle(char);
   __result(cs.backgroundImage.indexOf('linear-gradient') >= 0, 'hero name char gradient present');
-  __result(cs.backgroundImage.indexOf('30, 58, 95') >= 0, 'hero name gradient is DARK ink, got ' + cs.backgroundImage);
+  __result(cs.backgroundImage.indexOf('16, 32, 39') >= 0, 'hero name gradient is warm ink, got ' + cs.backgroundImage);
 }
 var greetChar = document.querySelector('.hero-view #typeTarget .char');
 __result(!!greetChar, 'greeting chars present');
 if (greetChar) {
-  __result(getComputedStyle(greetChar).backgroundImage.indexOf('30, 58, 95') >= 0, 'greeting chars also dark ink gradient');
+  __result(getComputedStyle(greetChar).backgroundImage.indexOf('16, 32, 39') >= 0, 'greeting chars also dark ink gradient');
 }
 var roleEl = hero.querySelector('.hero .role');
 if (roleEl) {
-  __result(getComputedStyle(roleEl).color.indexOf('51, 65, 85') >= 0, 'role badge ink-strong text, got ' + getComputedStyle(roleEl).color);
+  __result(getComputedStyle(roleEl).color.indexOf('255, 255, 255') >= 0, 'role badge white text, got ' + getComputedStyle(roleEl).color);
+  __result(getComputedStyle(roleEl).backgroundColor.indexOf('86, 130, 111') >= 0, 'role badge sage bg, got ' + getComputedStyle(roleEl).backgroundColor);
 }
 
 // 底部「下一页 · 教育背景」引导：可见且路由到 education

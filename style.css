@@ -312,7 +312,7 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
 .hero .char, #typeTarget .char { color: var(--ink-strong); }
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   .hero .char, #typeTarget .char {
-    background: linear-gradient(180deg, #1e3a5f, rgba(30, 58, 95, 0.35));
+    background: linear-gradient(180deg, #102027, rgba(16, 32, 39, 0.35));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -369,13 +369,17 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   object-fit: cover;
   pointer-events: none;
 }
-.hero-video { opacity: 0; } /* 加载后由 JS 淡入 */
+.hero-video { opacity: 0; filter: saturate(0.9) contrast(0.98) brightness(1.10); } /* 加载后由 JS 淡入；v9 手法微调亮深色云端小岛视频 */
 .hero-scrim {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.25) 45%, rgba(255, 255, 255, 0.55) 100%);
+  background:
+    radial-gradient(circle at 5% 8%,  rgba(255, 190, 210, 0.30), transparent 34%),
+    radial-gradient(circle at 91% 8%, rgba(246, 231, 116, 0.22), transparent 31%),
+    radial-gradient(circle at 93% 88%, rgba(102, 214, 224, 0.25), transparent 35%),
+    linear-gradient(180deg, rgba(247, 243, 233, 0.50) 0%, rgba(247, 243, 233, 0.70) 38%, rgba(247, 243, 233, 0.72) 55%, rgba(247, 243, 233, 0.55) 100%);
 }
 .hero-inner {
   position: relative;
@@ -395,7 +399,7 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
 .hero-view .char, .hero-view #typeTarget .char { color: var(--ink-strong); }
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   .hero-view .char, .hero-view #typeTarget .char {
-    background: linear-gradient(90deg, #1e3a5f, #64748b);
+    background: linear-gradient(90deg, #102027, #536269);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -403,26 +407,26 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   }
 }
 .hero-view .role {
-  color: var(--ink-strong);
-  background: rgba(255, 255, 255, 0.65);
-  border: 1px solid rgba(30, 58, 95, 0.16);
+  color: #fff;
+  background: #56826f;
+  border: 1px solid rgba(86, 130, 111, 0.35);
 }
 .hero-view .typing-line { color: var(--ink-soft); }
 .hero-view .typing-target { color: var(--ink-strong); }
 .hero-view .btn-ghost {
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.55);
   color: var(--ink-strong);
-  border: 1px solid rgba(30, 58, 95, 0.18);
+  border: 1px solid rgba(16, 32, 39, 0.22);
 }
 .hero-view .btn-ghost:hover {
   background: rgba(255, 255, 255, 0.85);
   color: var(--ink-strong);
-  border-color: rgba(30, 58, 95, 0.3);
+  border-color: rgba(16, 32, 39, 0.3);
 }
 .hero-view .contacts { color: var(--ink-soft); }
 .hero-view .contacts a {
   color: var(--ink-soft);
-  border-bottom-color: rgba(30, 58, 95, 0.25);
+  border-bottom-color: rgba(16, 32, 39, 0.25);
 }
 /* 底部「下一页」引导 */
 .hero-next {
@@ -436,7 +440,7 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   align-items: center;
   gap: 0.05rem;
   padding: 0.4rem 1.1rem;
-  color: rgba(30, 58, 95, 0.7);
+  color: rgba(16, 32, 39, 0.62);
   text-decoration: none;
   animation: heroNudge 2.4s ease-in-out infinite;
 }
@@ -473,11 +477,11 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
 }
 .btn-ghost:hover { color: var(--accent); border-color: rgba(56, 189, 248, 0.4); }
 .btn-accent {
-  background: linear-gradient(135deg, #38bdf8, #60a5fa 50%, #818cf8);
+  background: #263437;
   color: #fff;
-  box-shadow: 0 2px 10px rgba(56, 189, 248, 0.3);
+  box-shadow: 0 2px 8px rgba(16, 32, 39, 0.3);
 }
-.btn-accent:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4); }
+.btn-accent:hover { background: #334548; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(16, 32, 39, 0.35); }
 
 /* Hero 打字机 */
 .typing-line {
