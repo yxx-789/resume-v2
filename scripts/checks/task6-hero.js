@@ -14,7 +14,7 @@ __result(mh >= window.innerHeight - 100, 'hero fills viewport (minus nav), minHe
 // 无 .glass 容器
 __result(!hero.querySelector('.glass'), 'hero has no .glass box');
 
-// 三层背景：海报兜底图 → 视频 → 深色渐变遮罩
+// 三层背景：海报兜底图 → 视频 → 浅色渐变遮罩
 var poster = hero.querySelector('.hero-poster');
 __result(!!poster && getComputedStyle(poster).position === 'absolute', 'poster bg layer present');
 var video = hero.querySelector('.hero-video');
@@ -38,7 +38,7 @@ if (char) {
 var greetChar = document.querySelector('.hero-view #typeTarget .char');
 __result(!!greetChar, 'greeting chars present');
 if (greetChar) {
-  __result(getComputedStyle(greetChar).backgroundImage.indexOf('30, 58, 95') >= 0, 'greeting chars also light gradient');
+  __result(getComputedStyle(greetChar).backgroundImage.indexOf('30, 58, 95') >= 0, 'greeting chars also dark ink gradient');
 }
 var roleEl = hero.querySelector('.hero .role');
 if (roleEl) {

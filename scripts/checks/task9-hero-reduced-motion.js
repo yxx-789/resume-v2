@@ -1,4 +1,4 @@
-// 三期④ reduced-motion：Hero 显海报不播视频、导航深色静止、底部引导静止、内容完整
+// 三期④ reduced-motion：Hero 显海报不播视频、导航浅玻璃静止、底部引导静止、内容完整
 async function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
 
 __result(!document.documentElement.classList.contains('js-anim'), 'no js-anim (static fallback)');

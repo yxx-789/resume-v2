@@ -13,7 +13,7 @@
   }
   document.documentElement.classList.add('js-anim');
 
-  /* ---------- 导航滚动态：首屏顶部深色玻璃，滚动/其他视图浅色玻璃 ---------- */
+  /* ---------- 导航滚动态：全视图统一浅色玻璃（is-scrolled 保留为状态钩子，CSS 不再区分明暗） ---------- */
   var navEl = document.querySelector('.navbar');
   function syncNav() {
     if (!navEl) return;
