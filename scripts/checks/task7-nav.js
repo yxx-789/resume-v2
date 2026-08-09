@@ -16,12 +16,12 @@ if (links) {
 var linksArr = links ? links.querySelectorAll('a') : [];
 var inactiveLink = linksArr.length > 1 ? linksArr[1] : null;
 if (inactiveLink) {
-  __result(getComputedStyle(inactiveLink).color.indexOf('100, 116, 139') >= 0, 'nav inactive link ink over hero, got ' + getComputedStyle(inactiveLink).color);
+  __result(getComputedStyle(inactiveLink).color.indexOf('83, 98, 105') >= 0, 'nav inactive link warm ink over hero, got ' + getComputedStyle(inactiveLink).color);
 }
 var activeLink = links ? links.querySelector('a.active') : null;
 if (activeLink) {
   await sleep(600); // 等基础 transition 落定（删除 about 深色覆盖后，active 色由 ink-soft 过渡到 accent）
-  __result(getComputedStyle(activeLink).color.indexOf('56, 189, 248') >= 0, 'nav active link accent-blue over hero, got ' + getComputedStyle(activeLink).color);
+  __result(getComputedStyle(activeLink).color.indexOf('86, 130, 111') >= 0, 'nav active link sage over hero, got ' + getComputedStyle(activeLink).color);
 }
 
 // 滚动到底 → is-scrolled → 浅色玻璃
