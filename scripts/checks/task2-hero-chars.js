@@ -3,7 +3,10 @@ async function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
 function clickNav(name) { document.querySelector('.nav-links a[data-view="' + name + '"]').click(); }
 
 clickNav('about');
-await sleep(900);
+await sleep(150);
+var probeChar = document.querySelector('.hero .name .char');
+__result(probeChar && parseFloat(getComputedStyle(probeChar).opacity) < 0.98, 'name char mid-bounce during hero replay, got ' + (probeChar ? getComputedStyle(probeChar).opacity : 'none'));
+await sleep(750);
 
 var nameEl = document.querySelector('.hero .name');
 var greetEl = document.getElementById('typeTarget');

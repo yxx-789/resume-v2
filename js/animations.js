@@ -42,8 +42,8 @@
   /* ---------- Hero 逐字弹跳展开 ---------- */
   function playHero(view) {
     var role = view.querySelector('.hero .role');
-    var nameChars = splitChars(view.querySelector('.hero .name'));
-    var greetChars = splitChars(view.querySelector('#typeTarget'));
+    var nameChars = view.querySelectorAll('.hero .name .char');
+    var greetChars = view.querySelectorAll('#typeTarget .char');
     var tl = gsap.timeline({ defaults: { ease: 'back.out(1.7)' } });
     if (role) tl.from(role, { opacity: 0, y: 10, duration: 0.4 }, 0.05);
     if (nameChars && nameChars.length) {
