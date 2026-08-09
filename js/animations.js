@@ -3,8 +3,8 @@
   var HAS_GSAP = typeof gsap !== 'undefined';
   var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* 各视图光斑色相（浅色基调内微变）：sky / lighter blue / indigo / blue / cyan */
-  var VIEW_HUE = { about: 199, education: 210, experience: 243, works: 217, skills: 186 };
+  /* 各视图光斑色相（奶油暖色系内微变）：暖粉 / 暖黄 / 雾青 / 玫瑰 / 浅 sage */
+  var VIEW_HUE = { about: 330, education: 45, experience: 190, works: 350, skills: 160 };
 
   if (!HAS_GSAP || REDUCED) {
     // 不注入 js-anim：内容保持静态可见，CSS 负责降级

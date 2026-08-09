@@ -38,12 +38,8 @@ if (g1) {
   __result(parseFloat(getComputedStyle(g1).width) >= 640, 'glow enlarged (g1 width >= 640), got ' + getComputedStyle(g1).width);
 }
 
-// 视频纹理淡入：轮询等待不透明超过目标值一半（桌面 0.12 / 移动 0.06）
-var target = window.matchMedia('(max-width: 640px)').matches ? 0.06 : 0.12;
-var faded = await waitFor(function () {
-  return parseFloat(getComputedStyle(video).opacity) > target * 0.5;
-}, 5000);
-__result(faded, 'video fades in to ~' + target + ' (got ' + getComputedStyle(video).opacity + ')');
+  // 全局纹理按设计不再显示（v9 奶油主题）；元素保留，CSS display:none
+  __result(getComputedStyle(video).display === 'none', 'global bg-video hidden by design (cream theme), got ' + getComputedStyle(video).display);
 
 // 视差仍响应指针
 var t0 = getComputedStyle(glows).transform;

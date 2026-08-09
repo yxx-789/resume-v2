@@ -3,13 +3,13 @@ async function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
 function clickNav(name) { document.querySelector('.nav-links a[data-view="' + name + '"]').click(); }
 function hue() { return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--glow-hue')); }
 
-// 光斑变色：experience 靛(243) / skills 青(186)
+// 光斑变色：experience 雾青(190) / skills 浅 sage(160)
 clickNav('experience');
 await sleep(1300);
-__result(hue() >= 241 && hue() <= 245, 'glow hue -> indigo for experience, got ' + hue());
+__result(hue() >= 188 && hue() <= 192, 'glow hue -> mist-cyan for experience, got ' + hue());
 clickNav('skills');
 await sleep(1300);
-__result(hue() >= 184 && hue() <= 188, 'glow hue -> cyan for skills, got ' + hue());
+__result(hue() >= 158 && hue() <= 162, 'glow hue -> light sage for skills, got ' + hue());
 
 // blur→focus：进场中段有 blur>0，落定后 blur(0px)
 clickNav('about');
