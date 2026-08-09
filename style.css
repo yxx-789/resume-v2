@@ -36,7 +36,7 @@
 
 html { scroll-behavior: smooth; }
 
-/* 页面底（下→上）：深琥珀纹理图固定铺底 → 奶油 veil(0.80) → 淡粉/暖黄/雾青三色场 */
+/* 页面底（下→上）：深琥珀纹理图固定铺底（jpg 压缩版，原 png 在 ~/秋招/背景.png）→ 奶油 veil(0.80) → 淡粉/暖黄/雾青三色场 */
 body {
   font-family: 'Inter', 'Noto Serif SC', 'PingFang SC', 'Hiragino Sans GB', serif;
   background:
@@ -44,7 +44,7 @@ body {
     radial-gradient(circle at 94% 8%, rgba(245, 232, 116, 0.38), transparent 32%),
     radial-gradient(circle at 94% 82%, rgba(102, 214, 224, 0.38), transparent 34%),
     linear-gradient(rgba(247, 243, 233, 0.80), rgba(247, 243, 233, 0.80)),
-    url('assets/bg-autumn.png') center / cover no-repeat fixed;
+    url('assets/bg-autumn.jpg') center / cover no-repeat fixed;
   min-height: 100vh;
   color: var(--ink);
   line-height: 1.65;
