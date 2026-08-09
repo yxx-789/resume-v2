@@ -13,6 +13,15 @@
   }
   document.documentElement.classList.add('js-anim');
 
+  /* ---------- 导航滚动态：首屏顶部深色玻璃，滚动/其他视图浅色玻璃 ---------- */
+  var navEl = document.querySelector('.navbar');
+  function syncNav() {
+    if (!navEl) return;
+    var active = document.querySelector('.view.active');
+    var overHero = active && active.id === 'about' && window.scrollY <= 36;
+    navEl.classList.toggle('is-scrolled', !overHero);
+  }
+
   /* ---------- 视图入场编排（电影化 blur→focus + 光斑变色） ---------- */
   function playView(name) {
     var view = document.getElementById(name);
@@ -31,6 +40,7 @@
     if (hue !== undefined) {
       gsap.to(document.documentElement, { '--glow-hue': hue, duration: 0.8, ease: 'sine.inOut' });
     }
+    syncNav();
   }
 
   /* ---------- 字符拆分（幂等） ---------- */
@@ -183,6 +193,10 @@
     splitChars(document.querySelector('.hero .name'));
     splitChars(document.querySelector('#typeTarget'));
     setupTilt();
+    if (navEl) {
+      window.addEventListener('scroll', syncNav, { passive: true });
+      syncNav();
+    }
     setupBackground();
   }
 

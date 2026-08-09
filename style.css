@@ -202,6 +202,28 @@ body {
 @media (max-width: 640px) { .nav-contact { display: none; } }
 
 /* =========================================================
+   三期② 导航 is-scrolled 过渡：深色首屏顶部深色玻璃白字
+   （只覆盖背景/文字色/边框/阴影；radius 与 blur 保留在基础规则）
+   ========================================================= */
+body[data-view="about"] .navbar:not(.is-scrolled) {
+  background: rgba(13, 23, 27, 0.35);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+body[data-view="about"] .navbar:not(.is-scrolled) .nav-links {
+  background: rgba(13, 23, 27, 0.35);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: none;
+}
+body[data-view="about"] .navbar:not(.is-scrolled) .nav-brand { color: #fff; }
+body[data-view="about"] .navbar:not(.is-scrolled) .nav-brand .dot { color: #7dd3fc; }
+body[data-view="about"] .navbar:not(.is-scrolled) .nav-links a { color: rgba(255, 255, 255, 0.82); transition: none; }
+body[data-view="about"] .navbar:not(.is-scrolled) .nav-links a:hover { color: #fff; background: rgba(255, 255, 255, 0.12); }
+body[data-view="about"] .navbar:not(.is-scrolled) .nav-links a.active { color: #fff; }
+body[data-view="about"] .navbar:not(.is-scrolled) .nav-links a.active::after { background: #7dd3fc; }
+body[data-view="about"] .navbar:not(.is-scrolled) .nav-contact a { color: rgba(255, 255, 255, 0.82); }
+body[data-view="about"] .navbar:not(.is-scrolled) .nav-contact a:hover { background: rgba(255, 255, 255, 0.12); }
+
+/* =========================================================
    视图容器
    ========================================================= */
 .view {

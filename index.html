@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>邢耀 · AI 产品经理</title>
   <meta name="description" content="邢耀 — AI 产品经理，百度 AI 产品实习，独立全栈开发 AI 创作工作台。">
-  <link rel="stylesheet" href="style.css?v=20260809-9">
+  <link rel="stylesheet" href="style.css?v=20260809-10">
 </head>
 <body>
 
@@ -526,11 +526,13 @@
 /* ═════════════ 多视图路由（支持 hash 直达 + GSAP 入场） ═════════════ */
 (function () {
   var views = document.querySelectorAll('.view');
-  var links = document.querySelectorAll('.nav-links a, .backtop');
+  var links = document.querySelectorAll('.nav-links a, .backtop, .hero-next');
 
   function activate(name) {
     views.forEach(function (v) { v.classList.toggle('active', v.id === name); });
     links.forEach(function (a) { a.classList.toggle('active', a.dataset.view === name); });
+    document.body.dataset.view = name;
+    window.scrollTo({ top: 0, behavior: 'auto' });
     if (window.anim && window.anim.playView) window.anim.playView(name);
   }
 
@@ -557,7 +559,7 @@
     return valid.indexOf(h) >= 0 ? h : 'about';
   }
 
-  document.querySelectorAll('.nav-links a').forEach(function (a) {
+  document.querySelectorAll('.nav-links a, .hero-next').forEach(function (a) {
     a.addEventListener('click', function (e) {
       e.preventDefault();
       var name = a.dataset.view;
