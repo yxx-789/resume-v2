@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>邢耀 · AI 产品经理</title>
   <meta name="description" content="邢耀 — AI 产品经理，百度 AI 产品实习，独立全栈开发 AI 创作工作台。">
-  <link rel="stylesheet" href="style.css?v=20260809-2">
+  <link rel="stylesheet" href="style.css?v=20260809-3">
 </head>
 <body>
 
@@ -528,8 +528,8 @@
     var cur = document.querySelector('.view.active');
     var next = document.getElementById(name);
     if (pending) { pending.kill(); pending = null; }
-    if (cur && cur !== next && window.gsap) {
-      // 旧视图快速淡出，再切换（gsap 缺失时直接切换）
+    if (cur && cur !== next && window.gsap && document.documentElement.classList.contains('js-anim')) {
+      // 旧视图快速淡出，再切换（gsap 缺失或 reduced-motion 降级时直接切换，js-anim 与 animations.js 同一降级信号）
       pending = window.gsap.to(cur, {
         opacity: 0, duration: 0.12, ease: 'power1.in',
         onComplete: function () { pending = null; activate(name); }

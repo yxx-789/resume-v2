@@ -321,14 +321,6 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   margin-bottom: 0.8rem;
 }
 .typing-target { color: var(--accent); font-weight: 700; }
-.caret {
-  display: inline-block;
-  margin-left: 2px;
-  color: var(--accent);
-  font-weight: 700;
-  animation: blink 1s steps(1) infinite;
-}
-@keyframes blink { 50% { opacity: 0; } }
 
 /* 作品展示图卡片 */
 .shot-card {
@@ -1066,7 +1058,7 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
 /* 尊重系统「减弱动效」设置 */
 @media (prefers-reduced-motion: reduce) {
   .view { animation: none; }
-  .dot, .caret { animation: none; }
+  .dot { animation: none; }
   .view.active .reveal { animation: none; }
   .skill-bar-fill { transition: none; }
 }
