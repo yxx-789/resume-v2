@@ -34,9 +34,13 @@
 - 替换现有 CSS `riseUp` + JS 逐元素 delay 的实现；CSS 保留作降级。
 
 ### ② Hero 字符级展开
-- 主标题（名字）与副标题（「希望我们可以一起做一些有意思的事情！」）均改为**逐字弹跳展开**：每个字符从下方 `y:30, opacity:0` 错峰弹起落下（stagger）。
-- 移除现有打字机 JS 与 caret 闪烁（若保留 caret 则仅作为装饰性光标，否则一并移除）。
-- 汉字按单字拆分（可用 gsap utils 或手工 wrap 每个字于 `<span>`），确保不破坏语义（aria-label 保留完整句子）。
+- 现 hero 结构（`index.html` L39-47）：
+  - `.name` 主标题「邢耀」
+  - `.role`「AI 产品经理」（并入入场 stagger，简单淡入上浮，不做逐字）
+  - `.typing-line` 打字机行，`#typeTarget` 内容为完整问候语「你好呀，我是邢耀！希望我们可以一起做一些有意思的事情！」
+- 主标题 `.name` 与打字机行 `#typeTarget` 均改为**逐字弹跳展开**：每个字符从下方 `y:30, opacity:0` 错峰弹起落下（stagger）。
+- 移除现有打字机 JS（L564-578）与 caret 闪烁；`.typing-line` 保留容器，内容改为拆分后的字符 span。
+- 汉字按单字拆分（可用 gsap utils 或手工 wrap 每个字于 `<span>`），确保不破坏语义（`aria-label` 保留完整句子，字符 span 加 `aria-hidden`）。
 
 ### ③ 数字滚动计数
 - 给有冲击力的数字加计数动画，视图出现时从 0 滚动到目标值：
