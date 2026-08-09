@@ -33,19 +33,25 @@ body {
   position: relative;
 }
 
-/* 背景装饰：浅蓝渐变光斑 */
-body::before {
-  content: '';
+/* 背景光斑（GSAP 漂移 + 视差；无 JS/降级时为静态装饰） */
+.bg-glows {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background:
-    radial-gradient(600px 400px at 12% 8%, rgba(125, 211, 252, 0.35), transparent 70%),
-    radial-gradient(500px 350px at 88% 18%, rgba(56, 189, 248, 0.28), transparent 70%),
-    radial-gradient(700px 500px at 80% 85%, rgba(147, 197, 253, 0.30), transparent 70%),
-    radial-gradient(450px 300px at 20% 90%, rgba(56, 189, 248, 0.22), transparent 70%);
+  overflow: hidden;
   pointer-events: none;
 }
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  will-change: transform;
+  opacity: 0.65;
+}
+.g1 { width: 520px; height: 360px; top: 6%;  left: 6%;  background: radial-gradient(circle, rgba(125, 211, 252, 0.55), transparent 70%); }
+.g2 { width: 440px; height: 320px; top: 16%; right: 6%; background: radial-gradient(circle, rgba(56, 189, 248, 0.50), transparent 70%); }
+.g3 { width: 600px; height: 420px; bottom: 10%; left: 18%; background: radial-gradient(circle, rgba(147, 197, 253, 0.50), transparent 70%); }
+.g4 { width: 420px; height: 300px; bottom: 6%; right: 16%; background: radial-gradient(circle, rgba(56, 189, 248, 0.40), transparent 70%); }
 
 /* 漂浮光点背景（纯 CSS 微动效） */
 .bg-dots {
@@ -1039,6 +1045,7 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   .glass, .featured { padding: 1.3rem 1.1rem; }
   .hero { padding: 2rem 1rem 1.6rem; }
   .project-grid { grid-template-columns: 1fr; }
+  .glow { filter: blur(40px); opacity: 0.5; }
 }
 
 /* 打印友好：去掉毛玻璃（打印无法渲染 backdrop-filter） */

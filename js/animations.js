@@ -100,10 +100,35 @@
     });
   }
 
+  /* ---------- 背景视差光斑 ---------- */
+  function setupBackground() {
+    var glows = document.querySelector('.bg-glows');
+    if (!glows) return;
+    gsap.utils.toArray('.bg-glows .glow').forEach(function (g, i) {
+      gsap.to(g, {
+        x: gsap.utils.random(-34, 34), y: gsap.utils.random(-26, 26),
+        duration: gsap.utils.random(6, 10), ease: 'sine.inOut', yoyo: true, repeat: -1, delay: i * 0.5
+      });
+    });
+    var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!fine) return;
+    var cur = { x: 0, y: 0 }, target = { x: 0, y: 0 };
+    document.addEventListener('pointermove', function (e) {
+      target.x = (e.clientX / window.innerWidth - 0.5) * 40;
+      target.y = (e.clientY / window.innerHeight - 0.5) * 40;
+    });
+    gsap.ticker.add(function () {
+      cur.x += (target.x - cur.x) * 0.06;
+      cur.y += (target.y - cur.y) * 0.06;
+      gsap.set(glows, { x: cur.x, y: cur.y });
+    });
+  }
+
   function init() {
     splitChars(document.querySelector('.hero .name'));
     splitChars(document.querySelector('#typeTarget'));
     setupTilt();
+    setupBackground();
   }
 
   window.anim = { init: init, playView: playView };
