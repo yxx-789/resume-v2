@@ -1,26 +1,27 @@
-// 三期② 导航 is-scrolled 过渡：about 顶部深色玻璃白字，滚动/切视图浅色玻璃
+// 三期② 导航 is-scrolled 过渡：about 顶部浅玻璃，滚动/切视图浅色玻璃
 async function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
 
 var nav = document.querySelector('.navbar');
 var links = document.querySelector('.nav-links');
 __result(!!nav && !!links, 'navbar + nav-links present');
 
-// 初始（about 顶部）：无 is-scrolled → 深色玻璃白字
+// 初始（about 顶部）：无 is-scrolled → 浅玻璃
 __result(nav && !nav.classList.contains('is-scrolled'), 'nav not is-scrolled at hero top');
 if (links) {
   var bg = getComputedStyle(links).backgroundColor;
-  __result(bg.indexOf('13, 23, 27') >= 0, 'nav-links dark glass over hero, got ' + bg);
+  __result(bg.indexOf('255, 255, 255') >= 0, 'nav-links light glass over hero (light hero), got ' + bg);
   __result(getComputedStyle(links).borderRadius.indexOf('999') >= 0, 'nav-links pill radius kept, got ' + getComputedStyle(links).borderRadius);
   __result(getComputedStyle(links).backdropFilter.indexOf('blur') >= 0, 'nav-links blur kept, got ' + getComputedStyle(links).backdropFilter);
 }
 var linksArr = links ? links.querySelectorAll('a') : [];
 var inactiveLink = linksArr.length > 1 ? linksArr[1] : null;
 if (inactiveLink) {
-  __result(getComputedStyle(inactiveLink).color.indexOf('255, 255, 255') >= 0, 'nav inactive link white over hero, got ' + getComputedStyle(inactiveLink).color);
+  __result(getComputedStyle(inactiveLink).color.indexOf('100, 116, 139') >= 0, 'nav inactive link ink over hero, got ' + getComputedStyle(inactiveLink).color);
 }
 var activeLink = links ? links.querySelector('a.active') : null;
 if (activeLink) {
-  __result(getComputedStyle(activeLink).color.indexOf('125, 211, 252') >= 0, 'nav active link sky-blue over hero, got ' + getComputedStyle(activeLink).color);
+  await sleep(600); // 等基础 transition 落定（删除 about 深色覆盖后，active 色由 ink-soft 过渡到 accent）
+  __result(getComputedStyle(activeLink).color.indexOf('56, 189, 248') >= 0, 'nav active link accent-blue over hero, got ' + getComputedStyle(activeLink).color);
 }
 
 // 滚动到底 → is-scrolled → 浅色玻璃
@@ -44,11 +45,11 @@ if (links) {
   __result(getComputedStyle(links).backgroundColor.indexOf('255, 255, 255') >= 0, 'nav-links light on education, got ' + getComputedStyle(links).backgroundColor);
 }
 
-// 回到 about → 顶部深色玻璃
+// 回到 about → 顶部浅玻璃
 document.querySelector('.nav-links a[data-view="about"]').click();
 await sleep(550);
 __result(document.querySelector('.view.active').id === 'about', 'back to about');
 __result(nav.classList.contains('is-scrolled') === false, 'nav not is-scrolled back on about');
 if (links) {
-  __result(getComputedStyle(links).backgroundColor.indexOf('13, 23, 27') >= 0, 'nav-links dark again on about top, got ' + getComputedStyle(links).backgroundColor);
+  __result(getComputedStyle(links).backgroundColor.indexOf('255, 255, 255') >= 0, 'nav-links light glass on about top, got ' + getComputedStyle(links).backgroundColor);
 }

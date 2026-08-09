@@ -1,4 +1,4 @@
-// 三期① 首屏 Hero 全屏画布：无框、三层背景、白字、底部「下一页」引导、视频淡入
+// 三期① 首屏 Hero 全屏画布：无框、三层背景、深色文字、底部「下一页」引导、视频淡入
 async function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
 
 var hero = document.getElementById('about');
@@ -25,7 +25,7 @@ if (video) {
 var scrim = hero.querySelector('.hero-scrim');
 __result(!!scrim && getComputedStyle(scrim).backgroundImage.indexOf('linear-gradient') >= 0, 'hero scrim gradient present');
 
-// 内容白字（逐字渐变改为白色系；computed style 把 #fff 序列化为 rgb(255, 255, 255)）
+// 内容深色文字（逐字渐变改为深色系；computed style 把十六进制序列化为 rgb()）
 var nameEl = hero.querySelector('.hero .name');
 __result(!!nameEl, 'hero name present');
 var char = nameEl ? nameEl.querySelector('.char') : null;
@@ -33,16 +33,16 @@ __result(!!char, 'hero name split into chars');
 if (char) {
   var cs = getComputedStyle(char);
   __result(cs.backgroundImage.indexOf('linear-gradient') >= 0, 'hero name char gradient present');
-  __result(cs.backgroundImage.indexOf('255, 255, 255') >= 0, 'hero name gradient is LIGHT (white), got ' + cs.backgroundImage);
+  __result(cs.backgroundImage.indexOf('30, 58, 95') >= 0, 'hero name gradient is DARK ink, got ' + cs.backgroundImage);
 }
 var greetChar = document.querySelector('.hero-view #typeTarget .char');
 __result(!!greetChar, 'greeting chars present');
 if (greetChar) {
-  __result(getComputedStyle(greetChar).backgroundImage.indexOf('255, 255, 255') >= 0, 'greeting chars also light gradient');
+  __result(getComputedStyle(greetChar).backgroundImage.indexOf('30, 58, 95') >= 0, 'greeting chars also light gradient');
 }
 var roleEl = hero.querySelector('.hero .role');
 if (roleEl) {
-  __result(getComputedStyle(roleEl).color.indexOf('255, 255, 255') >= 0, 'role badge white text, got ' + getComputedStyle(roleEl).color);
+  __result(getComputedStyle(roleEl).color.indexOf('51, 65, 85') >= 0, 'role badge ink-strong text, got ' + getComputedStyle(roleEl).color);
 }
 
 // 底部「下一页 · 教育背景」引导：可见且路由到 education

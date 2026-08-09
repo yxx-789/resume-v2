@@ -202,28 +202,6 @@ body {
 @media (max-width: 640px) { .nav-contact { display: none; } }
 
 /* =========================================================
-   三期② 导航 is-scrolled 过渡：深色首屏顶部深色玻璃白字
-   （只覆盖背景/文字色/边框/阴影；radius 与 blur 保留在基础规则）
-   ========================================================= */
-body[data-view="about"] .navbar:not(.is-scrolled) {
-  background: rgba(13, 23, 27, 0.35);
-  border-bottom-color: rgba(255, 255, 255, 0.12);
-}
-body[data-view="about"] .navbar:not(.is-scrolled) .nav-links {
-  background: rgba(13, 23, 27, 0.35);
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow: none;
-}
-body[data-view="about"] .navbar:not(.is-scrolled) .nav-brand { color: #fff; }
-body[data-view="about"] .navbar:not(.is-scrolled) .nav-brand .dot { color: #7dd3fc; }
-body[data-view="about"] .navbar:not(.is-scrolled) .nav-links a { color: rgba(255, 255, 255, 0.82); transition: none; }
-body[data-view="about"] .navbar:not(.is-scrolled) .nav-links a:hover { color: #fff; background: rgba(255, 255, 255, 0.12); }
-body[data-view="about"] .navbar:not(.is-scrolled) .nav-links a.active { color: #7dd3fc; }
-body[data-view="about"] .navbar:not(.is-scrolled) .nav-links a.active::after { background: #7dd3fc; }
-body[data-view="about"] .navbar:not(.is-scrolled) .nav-contact a { color: rgba(255, 255, 255, 0.82); }
-body[data-view="about"] .navbar:not(.is-scrolled) .nav-contact a:hover { background: rgba(255, 255, 255, 0.12); }
-
-/* =========================================================
    视图容器
    ========================================================= */
 .view {
@@ -395,7 +373,7 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(7, 12, 14, 0.30) 0%, rgba(7, 12, 14, 0.55) 60%, rgba(7, 12, 14, 0.72) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.25) 45%, rgba(255, 255, 255, 0.55) 100%);
 }
 .hero-inner {
   position: relative;
@@ -410,12 +388,12 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   text-align: center;
   padding: 3.2rem 1rem 4.2rem;
 }
-/* 深色画布上的文字适配（置于既有 .hero 规则之后覆盖；#typeTarget 带 id 需更高优先级） */
-.hero-view .name { color: #fff; }
-.hero-view .char, .hero-view #typeTarget .char { color: #fff; }
+/* 浅色画布上的文字适配（置于既有 .hero 规则之后覆盖；#typeTarget 带 id 需更高优先级） */
+.hero-view .name { color: var(--ink-strong); }
+.hero-view .char, .hero-view #typeTarget .char { color: var(--ink-strong); }
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   .hero-view .char, .hero-view #typeTarget .char {
-    background: linear-gradient(180deg, #ffffff, rgba(255, 255, 255, 0.55));
+    background: linear-gradient(90deg, #1e3a5f, #64748b);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -423,26 +401,26 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   }
 }
 .hero-view .role {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.30);
+  color: var(--ink-strong);
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(30, 58, 95, 0.16);
 }
-.hero-view .typing-line,
-.hero-view .typing-target { color: rgba(255, 255, 255, 0.92); }
+.hero-view .typing-line { color: var(--ink-soft); }
+.hero-view .typing-target { color: var(--ink-strong); }
 .hero-view .btn-ghost {
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.30);
+  background: rgba(255, 255, 255, 0.65);
+  color: var(--ink-strong);
+  border: 1px solid rgba(30, 58, 95, 0.18);
 }
 .hero-view .btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--ink-strong);
+  border-color: rgba(30, 58, 95, 0.3);
 }
-.hero-view .contacts { color: rgba(255, 255, 255, 0.78); }
+.hero-view .contacts { color: var(--ink-soft); }
 .hero-view .contacts a {
-  color: rgba(255, 255, 255, 0.78);
-  border-bottom-color: rgba(255, 255, 255, 0.35);
+  color: var(--ink-soft);
+  border-bottom-color: rgba(30, 58, 95, 0.25);
 }
 /* 底部「下一页」引导 */
 .hero-next {
@@ -456,13 +434,13 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   align-items: center;
   gap: 0.05rem;
   padding: 0.4rem 1.1rem;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(30, 58, 95, 0.7);
   text-decoration: none;
   animation: heroNudge 2.4s ease-in-out infinite;
 }
 .hero-next .hn-label { font-size: 0.7rem; letter-spacing: 0.24em; }
 .hero-next .hn-title { font-size: 0.95rem; font-weight: 600; letter-spacing: 0.06em; }
-.hero-next:hover { color: #fff; }
+.hero-next:hover { color: var(--ink-strong); }
 @keyframes heroNudge {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50%      { transform: translateX(-50%) translateY(6px); }
