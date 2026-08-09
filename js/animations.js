@@ -21,6 +21,7 @@
       gsap.to(reveals, { opacity: 1, y: 0, duration: 0.5, ease: 'back.out(1.2)', stagger: 0.07 });
     }
     if (name === 'about') playHero(view);
+    if (name === 'experience' || name === 'works') countUp(view);
   }
 
   /* ---------- 字符拆分（幂等） ---------- */
@@ -54,6 +55,19 @@
       gsap.set(greetChars, { y: 22, opacity: 0 });
       tl.to(greetChars, { y: 0, opacity: 1, duration: 0.45, stagger: 0.02 }, '>-0.15');
     }
+  }
+
+  /* ---------- 数字滚动计数 ---------- */
+  function countUp(view) {
+    view.querySelectorAll('.num[data-count]').forEach(function (el) {
+      var target = parseFloat(el.dataset.count);
+      var suffix = el.dataset.suffix || '';
+      var obj = { v: 0 };
+      gsap.to(obj, {
+        v: target, duration: 1.2, ease: 'power2.out',
+        onUpdate: function () { el.textContent = Math.round(obj.v) + suffix; }
+      });
+    });
   }
 
   function init() {
