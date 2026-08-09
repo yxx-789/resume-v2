@@ -568,7 +568,7 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   position: absolute;
   inset: 0;
   display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(180deg, rgba(30,58,95,0.15), rgba(30,58,95,0.45));
+  background: linear-gradient(180deg, rgba(16,32,39,0.15), rgba(16,32,39,0.45));
   color: #fff;
   font-size: 0.9rem;
   font-weight: 700;
