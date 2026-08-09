@@ -127,9 +127,11 @@ about=330(暖粉) education=45(暖黄) experience=190(雾青) works=350(玫瑰) 
 ### ⑪ `?v=` 与 check 适配
 - `?v=` `20260809-12` → `20260809-13`。
 - **`task6-hero.js`**：名字/问候字渐变断言 `30,58,95` → `16,32,39`（#102027）；role 断言由 `color 含 51,65,85` → `color 含 255,255,255` + `background 含 86,130,111`；scrim 仍断言 linear-gradient。
-- **`task7-nav.js`**：nav-links 底 `255,255,255` → `247,243,233`；inactive `100,116,139` → `83,98,105`（#536269）；active `56,189,248` → `86,130,111`（sage）。
-- **`task9-hero-reduced-motion.js`**：nav-links 底 `255,255,255` → `247,243,233`。
-- 其余 13 个 check 为 presence/timing 型，实现后全量扫描确认无天蓝色断言残留。
+- **`task7-nav.js`**：nav-links 底保持白玻璃 `255,255,255`（**不改**）；仅两处链接色断言——inactive `100,116,139` → `83,98,105`（新 `--ink-soft` #536269）、active `56,189,248` → `86,130,111`（新 `--accent` sage）。
+- **`task9-hero-reduced-motion.js`**：nav-links 底 `255,255,255` 不变 → **无需适配**（保持白玻璃）。
+- **`task1-background.js`**：`.bg-video` 淡入断言（`opacity > target*0.5`）→ 改为断言 `display === 'none'`（全局纹理按设计不再显示；元素保留在 HTML，`.bg-video` 存在性断言不改）。
+- **`task4-transitions.js`**：光斑色相断言 `experience 241–245` → `190`（雾青，188–192）；`skills 184–188` → `160`（浅 sage，158–162）。
+- 其余 11 个 check 为 presence/timing 型，实现后全量扫描确认无天蓝色断言残留。
 
 ## 不改动
 
