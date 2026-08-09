@@ -1272,7 +1272,7 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   .skill-bar-fill { width: var(--w) !important; transition: none; }
   .hero-view, .hero-inner { min-height: auto; }
   .hero-view .hero-bg, .hero-view .hero-scrim, .hero-view .hero-next { display: none !important; }
-  .hero-view .name, .hero-view .char, .hero-view #typeTarget .char, .hero-view .role, .hero-view .typing-line {
+  .hero-view .name, .hero-view .char, .hero-view #typeTarget .char, .hero-view .role, .hero-view .typing-line, .hero-view .typing-target {
     color: var(--ink-strong) !important;
     background: none !important;
     -webkit-text-fill-color: var(--ink-strong) !important;
