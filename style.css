@@ -250,17 +250,8 @@ body[data-view="about"] .navbar:not(.is-scrolled) .nav-contact a:hover { backgro
 html.js-anim .view { animation: none; }
 html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: translateY(14px); }
 
-/* ---- 玻璃面板 ---- */
-.glass {
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 1.6rem 1.8rem;
-  margin-bottom: 1.4rem;
-}
+/* 去框后：视图内内容块直接浮在背景上，块间统一间距 */
+.view:not(.hero-view) > * + * { margin-top: 1.4rem; }
 
 /* ---- 版块标题 ---- */
 .section-title {
@@ -641,9 +632,6 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
 .tl-item::before { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18); }
 
 /* 能力标签区 */
-.ability { margin-top: 0.2rem; }
-.ability .group { margin-bottom: 0.9rem; }
-.ability .group:last-child { margin-bottom: 0; }
 .ability .group-label {
   font-size: 0.78rem;
   font-weight: 700;
@@ -724,7 +712,6 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
   transition: width 1.1s cubic-bezier(0.25, 0.8, 0.3, 1);
 }
-.ability .group { margin-bottom: 1.1rem; }
 
 /* =========================================================
    视图② 教育背景 / 通用网格
@@ -1257,7 +1244,7 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   .nav-inner { flex-wrap: wrap; height: auto; padding: 0.6rem 0.8rem; }
   .nav-links { width: 100%; }
   .view { padding: 1rem 0.8rem 2.5rem; }
-  .glass, .featured { padding: 1.3rem 1.1rem; }
+  .featured { padding: 1.3rem 1.1rem; }
   .hero { padding: 2rem 1rem 1.6rem; }
   .project-grid { grid-template-columns: 1fr; }
   .glow { filter: blur(40px); opacity: 0.5; }
@@ -1274,7 +1261,7 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   .navbar, .bg-dots, .bg-glows, .bg-flow, .bg-video, .modal-overlay, .nav-contact { display: none !important; }
   .view { display: block !important; animation: none; padding: 0; }
   .view.active .reveal { animation: none; }
-  .glass, .featured, .tl-card, .mini-card, .hobby-card, .project-card, .modal-card {
+  .featured, .tl-card, .mini-card, .hobby-card, .project-card, .modal-card {
     background: #fff; box-shadow: none;
     -webkit-backdrop-filter: none; backdrop-filter: none;
     border: 1px solid #ddd;
