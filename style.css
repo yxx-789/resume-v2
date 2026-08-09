@@ -249,6 +249,8 @@ html.js-anim .view.active .reveal { animation: none; opacity: 0; transform: tran
   padding: 0.32rem 1.1rem;
   margin-bottom: 0.8rem;
 }
+/* Hero 逐字展开：单字为内联块以支持 transform 动画 */
+.hero .char { display: inline-block; will-change: transform; }
 .hero .actions {
   display: flex;
   flex-wrap: wrap;

@@ -44,7 +44,7 @@
     </div>
     <div class="name">邢耀</div>
     <div class="role">AI 产品经理</div>
-    <div class="typing-line"><span class="typing-target" id="typeTarget"></span><span class="caret" aria-hidden="true">▌</span></div>
+    <div class="typing-line"><span class="typing-target" id="typeTarget" aria-label="你好呀，我是邢耀！希望我们可以一起做一些有意思的事情！">你好呀，我是邢耀！希望我们可以一起做一些有意思的事情！</span></div>
     <div class="actions">
       <a class="btn btn-accent" href="assets/产品-中南财经政法大学-邢耀.pdf" download>📄 下载简历 / 保存 PDF</a>
       <button class="btn btn-ghost" onclick="openModal()">📮 联系我</button>
@@ -571,20 +571,6 @@ function animateBars() {
     });
   });
 }
-
-/* ═════════════ Hero 打字机（友好问候，打完停留） ═════════════ */
-(function () {
-  var greeting = '你好呀，我是邢耀！希望我们可以一起做一些有意思的事情！';
-  var target = document.getElementById('typeTarget');
-  if (!target) return;
-  var c = 0;
-  (function type() {
-    if (c > greeting.length) return;
-    target.textContent = greeting.slice(0, c);
-    c++;
-    setTimeout(type, 110);
-  })();
-})();
 
 /* ═════════════ 联系弹窗 ═════════════ */
 function openModal() {
