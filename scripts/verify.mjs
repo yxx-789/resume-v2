@@ -3,7 +3,7 @@
 // 用法: node scripts/verify.mjs <check-file.js> [--reduced-motion]
 // check-file.js 在浏览器上下文运行，逐条调用 globalThis.__result(pass, msg)。
 // 全部通过退出 0，否则 1。
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
@@ -14,12 +14,31 @@ const reducedMotion = process.argv.includes('--reduced-motion');
 if (!checkFile) { console.error('usage: node scripts/verify.mjs <check.js> [--reduced-motion]'); process.exit(2); }
 const checkCode = readFileSync(checkFile, 'utf8');
 
+// 兜底 1：启动前先清掉端口上的残留无头 Chrome（上次异常退出留下的孤儿进程）
+try {
+  const leftovers = spawnSync('lsof', ['-tiTCP', String(PORT), '-sTCP:LISTEN'], { encoding: 'utf8' });
+  if (leftovers.status === 0 && leftovers.stdout.trim()) {
+    for (const pid of leftovers.stdout.trim().split('\n')) {
+      process.kill(Number(pid), 'SIGTERM');
+      console.warn(`WARN  killed leftover Chrome on port ${PORT} (pid ${pid})`);
+    }
+  }
+} catch (_) {} // lsof 不存在等情况直接忽略，让下面的等待超时报错
+
 const chrome = spawn(CHROME, [
   '--headless=new', `--remote-debugging-port=${PORT}`, '--disable-gpu',
   '--no-first-run', '--no-default-browser-check', '--window-size=1280,900',
   ...(reducedMotion ? ['--force-prefers-reduced-motion'] : []),
   URL,
 ], { stdio: 'ignore' });
+
+// 兜底 2：脚本任何路径退出（含被 SIGINT/SIGTERM/异常中断）都确保杀掉 Chrome，
+// 绝不让它变成无人回收的孤儿进程占满一个 CPU 核心。
+const killChrome = () => { try { chrome.kill('SIGTERM'); } catch (_) {} };
+process.on('exit', killChrome);
+process.on('SIGINT', () => process.exit(130));
+process.on('SIGTERM', () => process.exit(143));
+process.on('uncaughtException', (err) => { console.error('FAIL  uncaught:', err.message); process.exit(1); });
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 let page;
